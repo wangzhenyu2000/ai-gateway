@@ -1,0 +1,14 @@
+# Force utf8mb4 for both the server and in-container MySQL clients
+# (mysql / mysqladmin / mysqldump). Baked into the image via db/Dockerfile;
+# bind-mounting this file from Windows does not work because Docker Desktop
+# mounts are world-writable and MySQL ignores such config files.
+
+[client]
+default-character-set = utf8mb4
+
+[mysql]
+default-character-set = utf8mb4
+
+[mysqld]
+character-set-server = utf8mb4
+collation-server = utf8mb4_0900_ai_ci

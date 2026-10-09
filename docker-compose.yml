@@ -1,0 +1,30 @@
+services:
+  mysql:
+    # 自定义镜像：在官方 mysql:8.4 基础上打入 utf8mb4 配置（见 db/Dockerfile）
+    image: ai-gateway-mysql:8.4
+    build:
+      context: .
+      dockerfile: db/Dockerfile
+    container_name: ai-gateway-mysql
+    restart: unless-stopped
+    environment:
+      MYSQL_ROOT_PASSWORD: root123456
+      MYSQL_DATABASE: ai_gateway
+      # 网关应用使用的业务账号
+      MYSQL_USER: gateway
+      MYSQL_PASSWORD: gateway123456
+      TZ: Asia/Shanghai
+    # 本机 3306 已被占用，映射到 3307
+    ports:
+      - "3307:3306"
+    volumes:
+      - mysql-data:/var/lib/mysql
+      - ./db/init:/docker-entrypoint-initdb.d:ro
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "localhost", "-proot123456"]
+      interval: 5s
+      timeout: 3s
+      retries: 30
+
+volumes:
+  mysql-data:
