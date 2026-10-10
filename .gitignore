@@ -1,0 +1,17 @@
+# ---- Java / Gradle ----
+.gradle/
+build/
+out/
+*.class
+*.jar
+!gradle/wrapper/gradle-wrapper.jar
+
+# ---- IDEA ----
+.idea/
+*.iml
+*.ipr
+*.iws
+
+# ---- 其他 ----
+*.log
+.DS_Store

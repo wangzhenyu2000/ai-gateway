@@ -1,0 +1,3 @@
+// 企业 AI 网关（Enterprise AI Gateway）
+// 设计文档 3.2：单 Spring Boot 服务，物理单体、逻辑分层，暂不拆分多模块
+rootProject.name = 'ai-gateway'
